@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Connecter WhatsApp — RAYAD MD</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <style>
+    .connect-page {
+      min-height: calc(100vh - 70px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+    .connect-card {
+      background: rgba(15, 25, 40, 0.95);
+      border: 1px solid rgba(0, 255, 170, 0.2);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+    }
+    .connect-card h1 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .connect-card p {
+      color: #8fa3b8;
+      margin-bottom: 1.8rem;
+      font-size: 0.95rem;
+    }
+    .form-group {
+      text-align: left;
+      margin-bottom: 1.2rem;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      color: #a0b4c8;
+      margin-bottom: 0.4rem;
+    }
+    .phone-row {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .phone-row select,
+    .phone-row input {
+      background: #0d1520;
+      border: 1px solid rgba(0, 255, 170, 0.25);
+      color: #e8f0fe;
+      padding: 0.75rem 0.9rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+    }
+    .phone-row select {
+      width: 90px;
+    }
+    .phone-row input {
+      flex: 1;
+    }
+    .phone-row input:focus,
+    .phone-row select:focus {
+      border-color: #00ffaa;
+    }
+    .btn-generate {
+      width: 100%;
+      background: linear-gradient(135deg, #00ffaa, #00cc88);
+      color: #0a0f1a;
+      border: none;
+      padding: 0.9rem;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 0.5rem;
+    }
+    .btn-generate:hover {
+      opacity: 0.9;
+    }
+    .steps {
+      margin-top: 2rem;
+      text-align: left;
+      background: rgba(0, 255, 170, 0.05);
+      border-radius: 10px;
+      padding: 1.2rem;
+      border: 1px solid rgba(0, 255, 170, 0.12);
+    }
+    .steps h3 {
+      font-size: 0.95rem;
+      color: #00ffaa;
+      margin-bottom: 0.8rem;
+    }
+    .steps ol {
+      padding-left: 1.2rem;
+      color: #8fa3b8;
+      font-size: 0.88rem;
+    }
+    .steps li {
+      margin-bottom: 0.4rem;
+    }
+    .back-link {
+      display: inline-block;
+      margin-top: 1.5rem;
+      color: #8fa3b8;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .back-link:hover {
+      color: #00ffaa;
+    }
+    #result {
+      margin-top: 1.5rem;
+      display: none;
+    }
+    .pairing-code {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: 0.25rem;
+      color: #00ffaa;
+      margin: 1rem 0;
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">
+      <span class="logo-icon">◆</span>
+      <span>RAYAD MD</span>
+    </div>
+    <nav>
+      <a href="/">Accueil</a>
+      <a href="/dashboard" class="btn-primary">Tableau de bord</a>
+    </nav>
+  </header>
+
+  <div class="connect-page">
+    <div class="connect-card">
+      <h1>Connecter votre compte WhatsApp</h1>
+      <p>Générez un code d'appairage pour lier votre compte WhatsApp à notre serveur.</p>
+
+      <div class="form-group">
+        <label>Numéro WhatsApp</label>
+        <div class="phone-row">
+          <select id="country">
+            <option value="225">+225</option>
+            <option value="221">+221</option>
+            <option value="223">+223</option>
+            <option value="226">+226</option>
+            <option value="33">+33</option>
+            <option value="1">+1</option>
+          </select>
+          <input type="tel" id="phone" placeholder="07 12 34 56 78" />
+        </div>
+      </div>
+
+      <button class="btn-generate" onclick="generateCode()">Générer le code d'appairage</button>
+
+      <div id="result">
+        <p style="color:#8fa3b8;font-size:0.9rem;">Votre code d'appairage :</p>
+        <div class="pairing-code" id="codeDisplay">--------</div>
+        <p style="color:#8fa3b8;font-size:0.85rem;">Entrez ce code dans WhatsApp → Appareils connectés</p>
+      </div>
+
+      <div class="steps">
+        <h3>Comment ça marche ?</h3>
+        <ol>
+          <li>Entrez votre numéro WhatsApp et choisissez un serveur</li>
+          <li>Cliquez sur « Générer le code »</li>
+          <li>Ouvrez WhatsApp → Appareils connectés → Connecter un appareil</li>
+          <li>Choisissez « Lier avec le numéro de téléphone » et entrez le code</li>
+        </ol>
+      </div>
+
+      <a href="/" class="back-link">← Retour à l'accueil</a>
+    </div>
+  </div>
+
+  <script>
+    function generateCode() {
+      const country = document.getElementById('country').value;
+      const phone = document.getElementById('phone').value.replace(/\D/g, '');
+      if (!phone || phone.length < 8) {
+        alert('Veuillez entrer un numéro valide');
+        return;
+      }
+      // Placeholder — le vrai pairing Baileys viendra ensuite
+      const fakeCode = Math.random().toString(36).substring(2, 10).toUpperCase();
+      document.getElementById('codeDisplay').textContent = fakeCode.match(/.{1,4}/g).join('-');
+      document.getElementById('result').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
