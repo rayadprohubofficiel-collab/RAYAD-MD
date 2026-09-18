@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tableau de bord — RAYAD MD</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <style>
+    .layout {
+      display: flex;
+      min-height: calc(100vh - 60px);
+    }
+    .sidebar {
+      width: 240px;
+      background: #0d1520;
+      border-right: 1px solid rgba(0, 255, 170, 0.12);
+      padding: 1.5rem 1rem;
+      flex-shrink: 0;
+    }
+    .sidebar a {
+      display: block;
+      color: #8fa3b8;
+      text-decoration: none;
+      padding: 0.7rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 0.3rem;
+      font-size: 0.95rem;
+    }
+    .sidebar a:hover,
+    .sidebar a.active {
+      background: rgba(0, 255, 170, 0.1);
+      color: #00ffaa;
+    }
+    .main {
+      flex: 1;
+      padding: 2rem;
+    }
+    .welcome {
+      margin-bottom: 2rem;
+    }
+    .welcome h1 {
+      font-size: 1.6rem;
+      margin-bottom: 0.3rem;
+    }
+    .welcome p {
+      color: #8fa3b8;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .stat-card {
+      background: rgba(15, 25, 40, 0.9);
+      border: 1px solid rgba(0, 255, 170, 0.15);
+      border-radius: 12px;
+      padding: 1.3rem;
+    }
+    .stat-card .label {
+      color: #8fa3b8;
+      font-size: 0.85rem;
+      margin-bottom: 0.4rem;
+    }
+    .stat-card .value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #00ffaa;
+    }
+    .status-badge {
+      display: inline-block;
+      background: rgba(0, 255, 170, 0.15);
+      color: #00ffaa;
+      padding: 0.25rem 0.7rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+    }
+    .activity {
+      background: rgba(15, 25, 40, 0.9);
+      border: 1px solid rgba(0, 255, 170, 0.12);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+    .activity h2 {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      color: #00ffaa;
+    }
+    .activity-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      font-size: 0.9rem;
+      color: #a0b4c8;
+    }
+    .activity-item:last-child {
+      border-bottom: none;
+    }
+    @media (max-width: 768px) {
+      .layout { flex-direction: column; }
+      .sidebar { width: 100%; display: flex; overflow-x: auto; gap: 0.3rem; }
+      .sidebar a { white-space: nowrap; }
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">
+      <span class="logo-icon">◆</span>
+      <span>RAYAD MD</span>
+    </div>
+    <nav>
+      <a href="/connect" class="btn-primary">Connecter WhatsApp</a>
+    </nav>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <a href="/dashboard" class="active">Tableau de bord</a>
+      <a href="/connect">Connecter WhatsApp</a>
+      <a href="#">Sessions</a>
+      <a href="#">Serveurs</a>
+      <a href="#">Automatisation</a>
+      <a href="#">Messages</a>
+      <a href="#">Logs</a>
+      <a href="#">Paramètres</a>
+    </aside>
+
+    <div class="main">
+      <div class="welcome">
+        <h1>Bonjour 👋</h1>
+        <p>Voici un aperçu de votre activité</p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="label">Compte WhatsApp</div>
+          <div class="value" style="font-size:1.1rem;">Non connecté</div>
+          <span class="status-badge">Hors ligne</span>
+        </div>
+        <div class="stat-card">
+          <div class="label">Serveur utilisé</div>
+          <div class="value" style="font-size:1.1rem;">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">Temps de fonctionnement</div>
+          <div class="value" style="font-size:1.1rem;">0h 00min</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">État de la liaison</div>
+          <div class="value" style="font-size:1.1rem;">Inactif</div>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="label">Messages envoyés</div>
+          <div class="value">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">Messages reçus</div>
+          <div class="value">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">Contacts ajoutés</div>
+          <div class="value">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">Erreurs</div>
+          <div class="value">0</div>
+        </div>
+      </div>
+
+      <div class="activity">
+        <h2>Activité récente</h2>
+        <div class="activity-item">
+          <span>Aucune activité pour le moment</span>
+          <span>—</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
